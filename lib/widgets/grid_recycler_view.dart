@@ -1,9 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:white_note/provider/deleteoptions.dart';
+import 'package:white_note/provider/notes/deleteoptions.dart';
 import 'package:white_note/provider/notes/note_model.dart';
 import 'package:white_note/provider/notes/storeData.dart';
 import 'package:white_note/widgets/recent_container.dart';
@@ -26,11 +24,14 @@ class _GridRecyclerViewState extends State<GridRecyclerView> {
   bool? isLongPressed = false;
   bool select = false;
   String groupValue = 'Groups';
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     Delete del = Provider.of<Delete>(context);
+    var nm = Provider.of<NoteModel>(context, listen: false);
     StoreData sd = Provider.of<StoreData>(context);
+
     return Container(
       padding: const EdgeInsets.all(5),
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -54,6 +55,10 @@ class _GridRecyclerViewState extends State<GridRecyclerView> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, crossAxisSpacing: 4, mainAxisSpacing: 4),
                 itemBuilder: ((context, index) {
+                  if (kDebugMode) {
+                    print(
+                        'clicked on the checkbox ${widget.storeData[index].isChecked}');
+                  }
                   return ChangeNotifierProvider<NoteModel>.value(
                       //with this it will be to that shit
                       value: widget.storeData[index],
@@ -89,16 +94,28 @@ class _GridRecyclerViewState extends State<GridRecyclerView> {
                                     child: Checkbox(
                                         activeColor:
                                             Theme.of(context).primaryColor,
-                                        value: select,
-                                        onChanged: (bool? val) {
+                                        value:
+                                            //nm.getChecked,
+                                            widget.storeData[index].isChecked,
+                                        onChanged: (val) {
                                           setState(() {
                                             select = val!;
-                                            if (kDebugMode) {
-                                              print(val);
+
+                                            if (widget.storeData[index]
+                                                    .isChecked ==
+                                                true) {
+                                              widget.storeData[index]
+                                                  .isChecked = false;
+                                            } else {
+                                              widget.storeData[index]
+                                                  .isChecked = true;
                                             }
 
-                                            if (select == true) {
+                                            if (select) {
                                               sd.deletList(
+                                                  widget.storeData[index]);
+                                            } else {
+                                              sd.removeUnSelectedItem(
                                                   widget.storeData[index]);
                                             }
                                           });

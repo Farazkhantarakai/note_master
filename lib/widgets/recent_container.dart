@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:white_note/provider/deleteoptions.dart';
+import 'package:white_note/provider/notes/deleteoptions.dart';
 import 'package:white_note/provider/notes/note_model.dart';
 import 'package:white_note/screens/edit_note_page.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:white_note/provider/todo/toDeleteOption.dart';
 
 import 'package:white_note/provider/todo/to_do.dart';
 import 'package:white_note/screens/to_do_gridview.dart';
@@ -32,11 +33,39 @@ class _TodosState extends State<Todos> {
   @override
   Widget build(BuildContext context) {
     var nData = data.allToDo;
+    var to = Provider.of<ToDoDelte>(context);
+    var toDo = Provider.of<Todo>(context, listen: false);
     if (kDebugMode) {
       print(nData);
     }
     return SafeArea(
       child: Scaffold(
+          appBar: to.getToDoOption
+              ? AppBar(
+                  backgroundColor: Colors.white,
+                  leading: IconButton(
+                      onPressed: () {
+                        to.makeToDoFalse();
+                      },
+                      icon: const Icon(
+                        Icons.dangerous_outlined,
+                        color: Colors.red,
+                      )),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            toDo.deletingItem();
+                            to.makeToDoFalse();
+                          });
+                        },
+                        icon: const Icon(
+                          Icons.delete,
+                          color: Colors.red,
+                        ))
+                  ],
+                )
+              : null,
           body: Padding(
               padding: const EdgeInsets.all(8),
               child: Form(
@@ -44,28 +73,29 @@ class _TodosState extends State<Todos> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      controller: _titleController,
-                      onChanged: (String value) {
-                        Provider.of<Todo>(context, listen: false)
-                            .queryTodo(value);
-                      },
-                      decoration: InputDecoration(
-                          hintText: 'search todo..',
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 3,
-                                style: BorderStyle.solid),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
+                    if (to.getToDoOption == false)
+                      TextFormField(
+                        controller: _titleController,
+                        onChanged: (String value) {
+                          Provider.of<Todo>(context, listen: false)
+                              .queryTodo(value);
+                        },
+                        decoration: InputDecoration(
+                            hintText: 'search todo..',
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Colors.deepOrange,
+                                  color: Theme.of(context).primaryColor,
                                   width: 3,
-                                  style: BorderStyle.solid))),
-                    ),
+                                  style: BorderStyle.solid),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.deepOrange,
+                                    width: 3,
+                                    style: BorderStyle.solid))),
+                      ),
                     const SizedBox(
                       height: 10,
                     ),

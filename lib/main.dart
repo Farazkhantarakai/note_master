@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:white_note/provider/deleteoptions.dart';
+import 'package:white_note/provider/notes/deleteoptions.dart';
 import 'package:white_note/provider/notes/editable.dart';
+import 'package:white_note/provider/notes/note_model.dart';
 import 'package:white_note/provider/notes/storeData.dart';
 import 'package:white_note/provider/tab_provider/tab_manager.dart';
+import 'package:white_note/provider/todo/toDeleteOption.dart';
 import 'package:white_note/provider/todo/to_do.dart';
 import 'package:white_note/screens/edit_note_page.dart';
 import 'package:white_note/screens/list_screen.dart';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: ((context) => StoreData())),
           ChangeNotifierProvider(create: ((context) => TabManager())),
           ChangeNotifierProvider(create: (((context) => Todo()))),
-          ChangeNotifierProvider(create: (context) => Delete())
+          ChangeNotifierProvider(create: (context) => Delete()),
+          ChangeNotifierProvider(create: (context) => NoteModel()),
+          ChangeNotifierProvider(create: (context) => ToDoDelte())
         ],
         child: MaterialApp(
             theme:

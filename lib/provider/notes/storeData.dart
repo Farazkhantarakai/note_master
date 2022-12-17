@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:white_note/provider/deleteoptions.dart';
+
 import 'package:white_note/provider/notes/note_model.dart';
 import 'package:white_note/services/database_services.dart';
 import 'package:white_note/widgets/widgets.dart';
@@ -29,6 +29,7 @@ class StoreData extends ChangeNotifier {
 
   bool deleteSelectedItems() {
     deleteList.forEach((item) {
+      db.deleteItem(item);
       allNotes.removeWhere((element) {
         return element.id == item.id;
       });
@@ -36,6 +37,10 @@ class StoreData extends ChangeNotifier {
 
     notifyListeners();
     return true;
+  }
+
+  removeUnSelectedItem(NoteModel nm) {
+    deleteList.remove(nm);
   }
 
   void insertData(NoteModel nm) async {

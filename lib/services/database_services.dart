@@ -95,4 +95,16 @@ CREATE TABLE todo(id  INTEGER PRIMARY KEY   AUTOINCREMENT,title TEXT,checked INT
         where: 'id=?', whereArgs: [toDoModel.id]);
     return result;
   }
+
+  Future<int> deleteItem(NoteModel note) async {
+    Database db = await instance.database;
+    final result = db.delete('Note', where: 'id=?', whereArgs: [note.id]);
+    return result;
+  }
+
+  Future<int> todoDelete(ToDoModel tm) async {
+    Database db = await instance.database;
+    final result = db.delete('todo', where: 'id=?', whereArgs: [tm.id]);
+    return result;
+  }
 }

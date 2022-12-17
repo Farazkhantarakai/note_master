@@ -1,8 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:white_note/provider/deleteoptions.dart';
+import 'package:white_note/provider/notes/deleteoptions.dart';
 import 'package:white_note/provider/notes/note_model.dart';
 import 'package:white_note/provider/notes/storeData.dart';
 import 'package:white_note/widgets/grid_recycler_view.dart';
