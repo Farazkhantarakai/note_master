@@ -1,3 +1,4 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:bottom_picker/bottom_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,9 @@ class _ToDosRowState extends State<ToDosRow> {
               //   DatePicker.showDatePicker(context,
               // );
               //   DatePicker.showTime12hPicker(context);
+              //deal with all your alarm managing stuff here
+              // AndroidAlarmManager.periodic(
+              //     const Duration(seconds: 2), 1, () {},);
             },
             child: const Text('select time')),
         ElevatedButton(

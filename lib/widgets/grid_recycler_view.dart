@@ -8,7 +8,7 @@ import 'package:white_note/widgets/recent_container.dart';
 import 'package:white_note/widgets/widgets.dart';
 
 class GridRecyclerView extends StatefulWidget {
-  GridRecyclerView({
+  const GridRecyclerView({
     Key? key,
     required this.storeData,
     // required this.onLongPressed
@@ -67,24 +67,11 @@ class _GridRecyclerViewState extends State<GridRecyclerView> {
                           onLongPress: () {
                             setState(() {
                               del.changeOption();
-                              // isLongPressed = !isLongPressed!;
-                              // log(isLongPressed.toString());
-                              // if (kDebugMode) {
-                              //   print(
-                              //       'pressed inside grid recycler view $isLongPressed');
-                              // }
-                              // widget.onLongPressed(isLongPressed);
                             });
                           },
-                          onTap: () {
-                            // setState(() {
-                            //   isLongPressed = !isLongPressed!;
-                            // });
-                            del.makeDeleteOptionFalse();
-                            // if (kDebugMode) {
-                            //   print('i am pressed now!');
-                            // }
-                          },
+                          // onTap: () {
+                          //   del.makeDeleteOptionFalse();
+                          // },
                           child: Stack(fit: StackFit.expand, children: [
                             const RecentContainer(),
                             del.getDeleteOption

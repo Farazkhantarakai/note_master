@@ -42,7 +42,7 @@ class _RecentContainerState extends State<RecentContainer> {
 
     return InkWell(
       onTap: () {
-        del.changeOption();
+        //  del.changeOption();
         Navigator.pushNamed(context, EditNotePage.routName, arguments: data.id);
       },
       child: Card(

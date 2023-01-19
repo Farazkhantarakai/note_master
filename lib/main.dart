@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:white_note/provider/notes/deleteoptions.dart';
 import 'package:white_note/provider/notes/editable.dart';
@@ -54,6 +53,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => ToDoDelte())
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme:
                 ThemeData(primaryColor: const Color.fromARGB(235, 255, 102, 0)),
             routes: {
@@ -116,12 +116,6 @@ class _HomePageState extends State<HomePage> {
                         left: 5,
                         right: 5,
                         bottom: MediaQuery.of(context).viewInsets.bottom),
-                    // height: MediaQuery.of(context).size.height * 0.2,
-                    // decoration: const BoxDecoration(
-                    //     borderRadius: BorderRadius.only(
-                    //         topLeft: Radius.circular(10),
-                    //         topRight: Radius.circular(10))),
-
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,

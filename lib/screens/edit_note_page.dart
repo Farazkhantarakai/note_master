@@ -100,9 +100,9 @@ class _EditNotePageState extends State<EditNotePage> {
                             onPressed: () {
                               //
                               if (trackNoteId) {
-                                if (kDebugMode) {
-                                  print('i am in the update section');
-                                }
+                                // if (kDebugMode) {
+                                //   print('i am in the update section');
+                                // }
                                 if (_titleController.text.isEmpty &&
                                     _contentController.text.isEmpty) {
                                   showToast('empty note discarded');
@@ -121,15 +121,19 @@ class _EditNotePageState extends State<EditNotePage> {
                                   );
                                   StoreData sd = StoreData();
                                   sd.updateData(noteModel, noteId!);
-                                  Navigator.of(context)
-                                      .pushNamed(HomePage.routName);
+                                  // Navigator.of(context)
+                                  //     .pushNamed(HomePage.routName);
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      HomePage.routName, (route) => false);
                                 }
                               } else {
                                 if (_titleController.text.isEmpty &&
                                     _contentController.text.isEmpty) {
                                   showToast('empty note discarded');
-                                  Navigator.of(context)
-                                      .pushNamed(HomePage.routName);
+                                  // Navigator.of(context)
+                                  //     .pushNamed(HomePage.routName);
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      HomePage.routName, (route) => false);
                                   return;
                                 } else {
                                   NoteModel noteModel = NoteModel(
@@ -139,8 +143,10 @@ class _EditNotePageState extends State<EditNotePage> {
                                   );
                                   StoreData sd = StoreData();
                                   sd.insertData(noteModel);
-                                  Navigator.of(context)
-                                      .pushNamed(HomePage.routName);
+                                  // Navigator.of(context)
+                                  //     .pushNamed(HomePage.routName);
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      HomePage.routName, (route) => false);
                                 }
                               }
                             },
